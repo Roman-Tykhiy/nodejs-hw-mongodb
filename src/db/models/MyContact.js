@@ -7,35 +7,27 @@ const MyContactSchema = new Schema({
     },
     
     phoneNumber: {
-        type: Number,
+        type: String,
         require: true,
     },
 
     email: {
         type: String,
-        require: true,
     },
 
     isFavourite: {
         type: Boolean,
-        require: true,
+        default: false,
     },
     contactType: {
         type: String,
+        enum: ["work", "home", "personal"],
         require: true,
+        default: ["personal"],
     },
-
-    createdAt: {
-        type: String,
-        require: true,
-    },
-
-    updatedAt: {
-        type: String,
-        require: true,
-    },
-
-});
+},
+{ timestamps: true}
+);
 
 const contactCollection = model("contacts", MyContactSchema);
 export default contactCollection;
