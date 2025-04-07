@@ -23,8 +23,8 @@ export const setupServer = () => {
         })
     });
     app.get("/api/contacts/:contactId", async (req, res) => {
-        const { id } = req.params;
-        const data = await getContactsById(id);
+        const { contactId } = req.params;
+        const data = await getContactsById(contactId);
         if (!data) {
             return res.status(404).json({
                 status: 404,
