@@ -13,7 +13,7 @@ export const setupServer = () => {
             target: "pino-pretty"
         }
     }));
-    app.get("/api/contact", async (req, res) => {
+    app.get("/api/contacts", async (req, res) => {
         const data = await getContacts();     
         res.json({
             status: 200,
@@ -22,7 +22,7 @@ export const setupServer = () => {
              
         })
     });
-    app.get("/api/contact/:id", async (req, res) => {
+    app.get("/api/contact/:contactId", async (req, res) => {
         const { id } = req.params;
         const data = await getContactsById(id);
         if (!data) {
