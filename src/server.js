@@ -24,6 +24,8 @@ export const setupServer = () => {
     });
     app.get("/api/contacts/:contactId", async (req, res) => {
         const { contactId } = req.params;
+        
+        
         const data = await getContactsById(contactId);
         if (!data) {
             return res.status(404).json({
@@ -33,7 +35,7 @@ export const setupServer = () => {
         }
         res.json({
             status: 200,
-            message: `Successfully find contact with id ${id}`,
+            message: `Successfully find contact with id ${contactId}`,
             data,
              
         })
