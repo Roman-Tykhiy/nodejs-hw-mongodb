@@ -23,10 +23,10 @@ const MyContactSchema = new Schema({
         type: String,
         enum: ["work", "home", "personal"],
         require: true,
-        default: ["personal"],
+        default: "personal"
     },
 },
-{ timestamps: true}
+{versionKey:false, timestamps: true}
 );
 
 const contactCollection = model("contacts", MyContactSchema);
