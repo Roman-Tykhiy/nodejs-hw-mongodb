@@ -1,8 +1,8 @@
-import "dotenv/config";
+import 'dotenv/config';
 
 export const getEnVar = (name, defaultValue) => {
-    const value = process.env[name];
-    if (value) return value;
-    if (defaultValue) return defaultValue;
-    throw new Error(`Cannot find process.env[${name}]`);
-}
+  const value = process.env[name];
+  if (value) return value;
+  if (defaultValue) return defaultValue;
+  throw new Error(`Cannot find process.env[${name}]`);
+};

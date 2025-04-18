@@ -1,33 +1,46 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
+import { typeList } from '../../constans/contacts.js';
+import { handleServerError, hendleUpdateSettings } from './hooks.js';
 
-const MyContactSchema = new Schema({
+const MyContactSchema = new Schema(
+  {
     name: {
-        type: String,
-        require: true,
+      type: String,
+      require: true,
     },
-    
+
     phoneNumber: {
-        type: String,
-        require: true,
+      type: String,
+      require: true,
     },
 
     email: {
-        type: String,
+      type: String,
     },
 
     isFavourite: {
-        type: Boolean,
-        default: false,
+      type: Boolean,
+      default: false,
     },
     contactType: {
-        type: String,
-        enum: ["work", "home", "personal"],
-        require: true,
-        default: "personal"
+      type: String,
+      enum: typeList,
+      require: true,
+      default: 'personal',
     },
-},
-{versionKey:false, timestamps: true}
+  },
+  { versionKey: false, timestamps: true },
 );
 
-const contactCollection = model("contacts", MyContactSchema);
+MyContactSchema.post('save', handleServerError);
+MyContactSchema.pre('findOneAndUpdate', hendleUpdateSettings);
+MyContactSchema.post('findOneAndUpdate', handleServerError);
+export const contactSortFields = [
+  'name',
+  'phoneNumber',
+  'email',
+  'isFavourite',
+  'contactType',
+];
+const contactCollection = model('contacts', MyContactSchema);
 export default contactCollection;
