@@ -13,7 +13,12 @@ import {
 export const getContactsController = async (req, res) => {
   const paginationParams = parsePaginationParams(req.query);
   const sortParams = parseSortParams(req.query, contactSortFields);
-  const data = await getContacts({ ...paginationParams, ...sortParams });
+  const filters = req.user._id;
+  const data = await getContacts({
+    ...paginationParams,
+    ...sortParams,
+    filters,
+  });
   res.json({
     status: 200,
     message: 'Successfully found contacts!',
@@ -36,7 +41,8 @@ export const getContactsByIdControllers = async (req, res) => {
 };
 
 export const addContactsControler = async (req, res) => {
-  const data = await addContact(req.body);
+  const { _id: userId } = req.user;
+  const data = await addContact({ ...req.body, userId });
   res.status(201).json({
     status: 201,
     message: 'Successfully created a contact!',
