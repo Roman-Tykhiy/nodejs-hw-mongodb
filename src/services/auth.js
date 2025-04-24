@@ -44,7 +44,7 @@ export const loginUser = async (payload) => {
 
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare) {
-    throw createHttpError(401, 'Email or password invalid');
+    throw createHttpError(401, 'Email or password invalid!');
   }
 
   await SessionCollection.findOneAndDelete({ userId: user._id });
