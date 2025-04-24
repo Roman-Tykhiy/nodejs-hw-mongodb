@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import createHttpError from 'http-errors';
 import UserColection from '../db/models/User.js';
-import SessionCollection from '../db/models/session.js';
+import SessionCollection from '../db/models/Sesion.js';
 import { randomBytes } from 'node:crypto';
 import { accessTokenLifeTime } from '../constans/auth.js';
 import { refreshTokenLifeTime } from '../constans/auth.js';
