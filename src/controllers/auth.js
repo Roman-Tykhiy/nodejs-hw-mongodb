@@ -17,10 +17,14 @@ const setupSession = (res, session) => {
 };
 
 export const registerController = async (req, res) => {
-  await registerUser(req.body);
+  const data = await registerUser(req.body);
+  const { name, email } = data;
+
   res.status(201).json({
     status: 201,
     massage: 'Successfully registered a user!',
+    name,
+    email,
   });
 };
 

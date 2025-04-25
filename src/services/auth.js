@@ -22,6 +22,7 @@ const createSession = () => {
 
 export const findSession = (query) => SessionCollection.findOne(query);
 export const findUser = (query) => UserColection.findOne(query);
+
 export const registerUser = async (payload) => {
   const { email, password } = payload;
   const user = await UserColection.findOne({ email });

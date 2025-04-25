@@ -4,7 +4,7 @@ import { emailRegexp } from '../../constans/auth.js';
 
 const userSchema = new Schema(
   {
-    userName: {
+    name: {
       type: String,
       required: true,
     },

@@ -21,7 +21,7 @@ export const getContacts = async ({
     .merge(contactsQuery)
     .countDocuments();
 
-  const items = await contactsQuery
+  const data = await contactsQuery
     .skip(skip)
     .limit(perPage)
     .sort({ [sortBy]: sortOrder });
@@ -33,7 +33,7 @@ export const getContacts = async ({
   });
 
   return {
-    items,
+    data,
     page,
     perPage,
     totalItems,
@@ -42,8 +42,15 @@ export const getContacts = async ({
     hasPreviousPage,
   };
 };
-export const getContactsById = (contactId) =>
-  contactCollection.findOne({ _id: contactId });
+export const getContactsById = async (contactId, filters) => {
+  const contactsQuery = contactCollection.findOne({ _id: contactId });
+  if (filters) {
+    contactsQuery.where('userId').equals(filters);
+  }
+  const data = await contactsQuery;
+  return data;
+};
+
 export const addContact = (payload) => contactCollection.create(payload);
 export const updateContact = async (contactID, payload) => {
   const data = await contactCollection.findOneAndUpdate(
