@@ -23,8 +23,10 @@ export const registerController = async (req, res) => {
   res.status(201).json({
     status: 201,
     massage: 'Successfully registered a user!',
-    name,
-    email,
+    data: {
+      name,
+      email,
+    },
   });
 };
 
